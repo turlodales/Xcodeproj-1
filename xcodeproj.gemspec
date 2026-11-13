@@ -24,13 +24,15 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'atomos',         '~> 0.1.3'
   s.add_runtime_dependency 'CFPropertyList', '>= 2.3.3', '< 4.0'
   s.add_runtime_dependency 'claide',         '>= 1.0.2', '< 2.0'
-  s.add_runtime_dependency 'colored2',       '~> 3.1'
-  s.add_runtime_dependency 'nanaimo',        '~> 0.3.0'
-  s.add_runtime_dependency 'rexml',          '~> 3.2.4'
+  s.add_runtime_dependency 'colored2',       '>= 3.1', '< 5'
+  s.add_runtime_dependency 'nanaimo',        '~> 0.4.0'
+  s.add_runtime_dependency 'rexml',          '>= 3.4.2', '< 4.0'
+  s.add_runtime_dependency 'nkf' # required for older CFPropertyList versions on Ruby 3.4
+  s.add_runtime_dependency 'base64' # required for older CFPropertyList versions on Ruby 3.4
 
   ## Make sure you can build the gem on older versions of RubyGems too:
   s.rubygems_version = '1.6.2'
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
-  s.required_ruby_version = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.7.0'
   s.specification_version = 3 if s.respond_to? :specification_version
 end

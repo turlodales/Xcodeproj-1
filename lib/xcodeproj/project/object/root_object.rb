@@ -49,6 +49,14 @@ module Xcodeproj
         #
         has_one :main_group, PBXGroup
 
+        #  @return [String] whether minimizes project reference proxies
+        #
+        attribute :minimized_project_reference_proxies, String, '0'
+
+        #  @return [String] preferred project object version
+        #
+        attribute :preferred_project_object_version, String, Constants::LAST_KNOWN_OBJECT_VERSION.to_s
+
         # @return [PBXGroup] the group containing the references to products of
         #         the project.
         #
@@ -62,9 +70,9 @@ module Xcodeproj
         #
         attribute :project_root, String, ''
 
-        # @return [Array<XCRemoteSwiftPackageReference>] the list of Swift package references.
+        # @return [Array<XCRemoteSwiftPackageReference, XCLocalSwiftPackageReference>] the list of Swift package references.
         #
-        has_many :package_references, XCRemoteSwiftPackageReference
+        has_many :package_references, [XCRemoteSwiftPackageReference, XCLocalSwiftPackageReference]
 
         # @return [Array<ObjectDictionary>] any reference to other projects.
         #

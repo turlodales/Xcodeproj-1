@@ -112,6 +112,8 @@ module Xcodeproj
             :osx
           elsif sdk.include? 'appletvos'
             :tvos
+          elsif sdk.include? 'xros'
+            :visionos
           elsif sdk.include? 'watchos'
             :watchos
           end
@@ -134,6 +136,7 @@ module Xcodeproj
           :ios => 'IPHONEOS_DEPLOYMENT_TARGET',
           :osx => 'MACOSX_DEPLOYMENT_TARGET',
           :tvos => 'TVOS_DEPLOYMENT_TARGET',
+          :visionos => 'XROS_DEPLOYMENT_TARGET',
           :watchos => 'WATCHOS_DEPLOYMENT_TARGET',
         }.freeze
 
@@ -342,6 +345,10 @@ module Xcodeproj
               group = project.frameworks_group['tvOS'] || project.frameworks_group.new_group('tvOS')
               path_sdk_name = 'AppleTVOS'
               path_sdk_version = sdk_version || Constants::LAST_KNOWN_TVOS_SDK
+            when :visionos
+              group = project.frameworks_group['visionOS'] || project.frameworks_group.new_group('visionOS')
+              path_sdk_name = 'XROS'
+              path_sdk_version = sdk_version || Constants::LAST_KNOWN_VISIONOS_SDK
             when :watchos
               group = project.frameworks_group['watchOS'] || project.frameworks_group.new_group('watchOS')
               path_sdk_name = 'WatchOS'
@@ -453,6 +460,11 @@ module Xcodeproj
         #         target.
         #
         has_many :build_phases, AbstractBuildPhase
+
+        # @return [ObjectList<PBXFileSystemSynchronizedRootGroup>] the file system synchronized
+        #         groups containing files to include to build this target.
+        #
+        has_many :file_system_synchronized_groups, PBXFileSystemSynchronizedRootGroup
 
         public
 
@@ -677,18 +689,27 @@ module Xcodeproj
 
         def to_hash_as(method = :to_hash)
           hash_as = super
-          if !hash_as['packageProductDependencies'].nil? && hash_as['packageProductDependencies'].empty?
-            hash_as.delete('packageProductDependencies')
+          excluded_keys_for_serialization_when_empty.each do |key|
+            if !hash_as[key].nil? && hash_as[key].empty?
+              hash_as.delete(key)
+            end
           end
           hash_as
         end
 
         def to_ascii_plist
           plist = super
-          if !plist.value['packageProductDependencies'].nil? && plist.value['packageProductDependencies'].empty?
-            plist.value.delete('packageProductDependencies')
+          excluded_keys_for_serialization_when_empty.each do |key|
+            if !plist.value[key].nil? && plist.value[key].empty?
+              plist.value.delete(key)
+            end
           end
           plist
+        end
+
+        # @return [Array<String>] array of keys to exclude from serialization when the value is empty
+        def excluded_keys_for_serialization_when_empty
+          %w(packageProductDependencies fileSystemSynchronizedGroups)
         end
       end
 

@@ -519,6 +519,7 @@ end
 
 # Now load the concrete subclasses.
 require 'xcodeproj/project/object/swift_package_remote_reference'
+require 'xcodeproj/project/object/swift_package_local_reference'
 require 'xcodeproj/project/object/swift_package_product_dependency'
 require 'xcodeproj/project/object/build_configuration'
 require 'xcodeproj/project/object/build_file'
@@ -532,3 +533,5 @@ require 'xcodeproj/project/object/native_target'
 require 'xcodeproj/project/object/root_object'
 require 'xcodeproj/project/object/target_dependency'
 require 'xcodeproj/project/object/reference_proxy'
+require 'xcodeproj/project/object/file_system_synchronized_root_group'
+require 'xcodeproj/project/object/file_system_synchronized_exception_set'

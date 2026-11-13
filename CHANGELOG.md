@@ -4,11 +4,169 @@
 
 ##### Enhancements
 
+* Allow colored2 4.x, which no longer modifies a string literal that Ruby 3.4 warns about.  
+  [Jerome Lacoste](https://github.com/lacostej)
+  [#1054](https://github.com/CocoaPods/Xcodeproj/issues/1054)
+
+* Run the specs on Ruby 4.0 in CI. The development Gemfile moves to rake 13 and drops the unused
+  CodeClimate reporter, which needed `ostruct` and `logger`, and the spec task no longer nests
+  `bundle exec`.  
+  [Jerome Lacoste](https://github.com/lacostej)
+
+##### Bug Fixes
+
+* Update minimum required Ruby from 2.6 to 2.7.  
+  [Connor Tumbleson](https://github.com/iBotPeaches)
+  [#1053](https://github.com/CocoaPods/Xcodeproj/pull/1053)
+
+* Require rexml 3.4.2 or later.  
+  [Jerome Lacoste](https://github.com/lacostej)
+
+
+## 1.28.1 (2026-07-06)
+
+##### Enhancements
+
 * None.  
 
 ##### Bug Fixes
 
+* Fix `cannot load such file -- kconv`, `cannot load such file -- base64` crash when running on Ruby 3.4.  
+  [Eric Amorde](https://github.com/amorde)
+  [#1046](https://github.com/CocoaPods/Xcodeproj/pull/1046)
+
+
+## 1.28.0 (2026-07-06)
+
+##### Enhancements
+
+* Add objectVersion for Xcode 26.3 compatibility.  
+  [Eric Amorde](https://github.com/amorde)
+  [#1041](https://github.com/CocoaPods/Xcodeproj/pull/1041)
+
+* Add support for `assetTagsByRelativePath` field on `PBXFileSystemSynchronizedBuildFileExceptionSet`.  
+  [Frederik Seiffert](https://github.com/triplef)
+  [#1035](https://github.com/CocoaPods/Xcodeproj/pull/1035)
+
+* Update constants for latest OS versions.  
+  [Eric Amorde](https://github.com/amorde)
+  [#1042](https://github.com/CocoaPods/Xcodeproj/pull/1042)
+
+
+##### Bug Fixes
+
+* Update minimum required Ruby from 2.0 to 2.6.  
+  [Eric Amorde](https://github.com/amorde)
+  [#1043](https://github.com/CocoaPods/Xcodeproj/pull/1043)
+
+
+## 1.27.0 (2024-10-31)
+
+##### Enhancements
+
 * None.  
+
+##### Bug Fixes
+
+* Revert default build settings changes from https://github.com/CocoaPods/Xcodeproj/pull/987.  
+  [Eric Amorde](https://github.com/amorde)
+  [#992](https://github.com/CocoaPods/Xcodeproj/pull/992)
+
+
+## 1.26.0 (2024-10-27)
+
+##### Enhancements
+
+* Add support for file system synchronized groups introduced in Xcode 16.  
+  [Brett-Best](https://github.com/Brett-Best), [gui17aume](https://github.com/gui17aume)
+  [#985](https://github.com/CocoaPods/Xcodeproj/pull/985)
+
+* Update default build settings for Xcode 16.0.  
+  [Eric Amorde](https://github.com/amorde)
+  [#987](https://github.com/CocoaPods/Xcodeproj/pull/987)
+
+##### Bug Fixes
+
+* None.  
+
+
+## 1.25.1 (2024-10-03)
+
+##### Enhancements
+
+* None.  
+
+##### Bug Fixes
+
+* Bump `rexml` dependency to address [CVE-2024-43398](https://www.ruby-lang.org/en/news/2024/08/22/dos-rexml-cve-2024-43398/).  
+  [Eric Amorde](https://github.com/amorde)
+  [#970](https://github.com/CocoaPods/Xcodeproj/pull/970)
+
+
+## 1.25.0 (2024-08-07)
+
+##### Enhancements
+
+* Print a warning instead of raising an exception when an unrecognized Xcode project object version is found.  
+  [Kaspik](https://github.com/Kaspik)
+  [#953](https://github.com/CocoaPods/Xcodeproj/pull/953)
+
+* Add support for optional includes (via `#include?`) in xcconfig files.  
+  [Werelds](https://github.com/Werelds)
+  [#940](https://github.com/CocoaPods/Xcodeproj/pull/940)
+
+* Add support for Xcode 15.3 project versions.  
+  [Brett-Best](https://github.com/Brett-Best)
+  [#934](https://github.com/CocoaPods/Xcodeproj/pull/934)
+
+
+##### Bug Fixes
+
+* Bump `rexml` dependency to address [CVE-2024-399086](https://www.cve.org/CVERecord?id=CVE-2024-399086).  
+  [bmedenwald](https://github.com/bmedenwald)
+  [#948](https://github.com/CocoaPods/Xcodeproj/pull/948)
+
+
+## 1.24.0 (2024-01-28)
+
+##### Enhancements
+
+* Add `expected_signature support` for `PBXFileReference`.  
+  [hieu9102002](https://github.com/hieu9102002)
+  [#924](https://github.com/CocoaPods/Xcodeproj/pull/924)
+
+##### Bug Fixes
+
+* Update remote Swift packages annotations to match Xcode.  
+   [alexandre-pod](https://github.com/alexandre-pod)
+   [#921](https://github.com/CocoaPods/Xcodeproj/pull/921)
+
+* Fix a crash when serializing a target dependency without a target proxy.  
+   [byohay](https://github.com/byohay)
+   [#915](https://github.com/CocoaPods/Xcodeproj/pull/915)
+
+
+## 1.23.0 (2023-09-22)
+
+##### Enhancements
+
+* Add support for parsing `XCLocalSwiftPackageReference` objects.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#911](https://github.com/CocoaPods/Xcodeproj/pull/911)
+  
+* Add Xcode 15.0 object version support.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#910](https://github.com/CocoaPods/Xcodeproj/pull/910)  
+
+* Add `visionOS` as a new platform.  
+  [Gabriel Donadel](https://github.com/gabrieldonadel)
+  [#913](https://github.com/CocoaPods/Xcodeproj/pull/913)
+
+##### Bug Fixes
+
+* target_dependency: Fix crash if target_proxy is nil.  
+  [Ben Yohay](https://github.com/byohay)
+  [#915](https://github.com/CocoaPods/Xcodeproj/pull/915)
 
 
 ## 1.22.0 (2022-06-22)
